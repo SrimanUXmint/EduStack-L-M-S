@@ -1,0 +1,509 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #a6afca;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #a6afca;
+
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #a6afca;
+
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+.timetable-container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.timetable-header {
+  display: flex;
+  border-bottom: 1px solid #ccc;
+  font-weight: bold;
+}
+
+.timetable-row {
+  display: flex;
+  border-bottom: 1px solid #ccc;
+}
+
+.timetable-cell {
+  flex: 1;
+  padding: 20px;
+  text-align: center;
+  -webkit-text-fill-color: #070505;
+}
+
+.timetable-event {
+  margin-bottom: 5px;
+  padding: 8px 12px;
+  background-color: #aaa9b2;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(124, 106, 106, 0.1);
+}
+
+.timetable-event:last-child {
+  margin-bottom: 0;
+}
+/* Custom Calendar CSS for Styling */
+.calendar-container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  
+  backdrop-filter: blur(10px); /* Optional: blur effect */
+}
+
+.responsive-calendar {
+  width: 100%;
+  border: none;
+  font-family: 'Arial, sans-serif';
+  color: #333; /* Dark font color */
+}
+
+.react-calendar__tile {
+  max-width: 100%;
+  padding: 15px;
+  text-align: center;
+  border-radius: 8px; /* Rounded borders for the tiles */
+}
+
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  background-color: #505385;
+  color: white;
+  border-radius: 8px; /* Maintain rounded borders on hover/focus */
+}
+
+.react-calendar__tile--now {
+  background: rgba(80, 83, 133, 0.5); /* Slightly transparent highlight */
+  color: #19202e; /* Dark font color */
+  border-radius: 8px; /* Maintain rounded borders */
+}
+
+.react-calendar__tile--active {
+  background: #505385;
+  color: white;
+  border-radius: 8px; /* Maintain rounded borders */
+}
+
+.react-calendar__navigation button {
+  background: none;
+  border: none;
+  color: #333; /* Dark font color */
+  font-size: 1rem;
+}
+
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+  background-color: rgba(80, 83, 133, 0.1); /* Slightly transparent on hover */
+  border-radius: 50%; /* Round buttons on hover */
+}
+
+.react-calendar__navigation {
+  margin-bottom: 1rem;
+}
+
+.react-calendar__month-view__days__day--weekend {
+  color: #333; /* Dark font color for weekends */
+}
+
+@media (max-width: 768px) {
+  .calendar-container {
+    padding: 10px;
+  }
+
+  .react-calendar__tile {
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
+}
+.all {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Add some space between circles */
+}
+
+.circle-wrap {
+  display: flex;
+  flex-direction: column; /* Arrange circle and label vertically */
+  align-items: center; /* Center align items */
+  width: 100px; /* Adjust width for better label positioning */
+  margin-top: 20px;
+  position: relative;
+}
+
+.circle {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  transform: rotate(-90deg); /* Rotate the circle to start from the top */
+}
+
+
+.circle-background,
+.circle-progress {
+  fill: none;
+  stroke-width: 8;
+}
+
+.circle-background {
+  stroke: #d9d7da;
+}
+
+/* .circle-progress {
+  stroke-linecap: round;
+  stroke-dasharray: 226; /* 2 * Math.PI * 36 */
+  /* stroke-dashoffset: 226; /* Full circumference for initial state */
+  /* transition: stroke-dashoffset 0.5s;
+} */ 
+.circle-progress {
+  stroke-dashoffset: 141.3; /* Circumference - 90 degrees */
+  transition: stroke-dashoffset 0.5s;
+}
+
+.inside-circle {
+  position: absolute;
+  top: 37%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(7, 6, 6);
+  z-index: 18;
+  font-weight: 700;
+  font-size: 1.2em;
+}
+
+.label {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 0.9em; /* Adjust font size if necessary */
+  color: black; /* Ensure the text color is visible */
+  font-weight: bold; /* Make the text bold */
+}
+.timetable-container {
+  margin: 20px;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+  width: 120px; /* Fixed width for all cells */
+  height: 80px; /* Fixed height for all cells */
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  color: black; /* Ensure text color is black */
+}
+
+td {
+  background-color: #cdcdcd; /* Background color for table cells */
+  color: black; /* Ensure text color is black */
+}
+
+@media screen and (max-width: 1024px) {
+  Th, Td {
+    padding: 8px;
+    font-size: 0.9em;
+    width: 100px; /* Adjust width for medium screens */
+    height: 70px; /* Adjust height for medium screens */
+  }
+
+  Th {
+    font-size: 1em;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  Th, Td {
+    padding: 6px;
+    font-size: 0.8em;
+    width: 90px; /* Adjust width for smaller screens */
+    height: 60px; /* Adjust height for smaller screens */
+  }
+
+  Th {
+    font-size: 0.9em;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  Th, Td {
+    padding: 4px;
+    font-size: 0.7em;
+    width: 80px; /* Adjust width for extra small screens */
+    height: 50px; /* Adjust height for extra small screens */
+  }
+
+  Th {
+    font-size: 0.8em;
+  }
+}
+.course-page {
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.back-button {
+  margin-right: 20px;
+}
+
+.back-link {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.notices-section, .quizzes-section {
+ 
+  padding: 20px;
+  border-radius: 8px;
+}
+
+h2 {
+  margin-top: 0;
+  color: rgb(249, 249, 249);
+}
+
+.notices-list, .quizzes-list {
+  margin-top: 10px;
+}
+
+.notice-item, .quiz-item {
+  margin-bottom: 10px;
+}
+
+.notice-details, .quiz-details {
+  margin-top: 10px;
+  padding: 10px;
+ 
+  border-radius: 8px;
+}
+
+.notice-details {
+  color: rgb(255, 255, 255);
+}
+
+.quiz-link {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+.quiz-grade p {
+  margin: 5px 0;
+}
+
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column;
+  }
+
+  .back-link {
+    font-size: 14px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .back-link {
+    font-size: 12px;
+  }
+
+  h2 {
+    font-size: 16px;
+  }
+
+  .quiz-link {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
+.bkie7gg0 {
+  transition: transform 0.2s ease-in-out; /* Add transition for smooth effect */
+}
+
+.bkie7gg0:hover {
+  transform: scale(1.05); /* Scale out by 5% on hover */
+}
+/* General dropdown styling */
+.dropdown {
+  position: absolute;
+  background-color: rgba(132, 134, 142, 0.42);
+  border: 1px solid rgba(142, 132, 132, 0.42);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10%;
+  z-index: 1000;
+  min-width: 200px;
+}
+
+/* Notification panel styling */
+.notification-panel {
+  right: 0;
+  top: 40px;
+}
+
+/* User panel styling */
+.user-dropdown {
+  right: 0;
+  top: 40px;
+}
+
+/* Dropdown content styling */
+.notification-dropdown, .user-dropdown-content {
+  list-style: none;
+  margin: 0;
+  padding: 10px;
+}
+
+.notification-dropdown li, .user-dropdown-content li {
+  padding: 10px;
+  border-bottom: 1px solid #080707;
+}
+
+.notification-dropdown li:last-child, .user-dropdown-content li:last-child {
+  border-bottom: none;
+}
+
+/* Icon and panel alignment */
+.icon {
+  cursor: pointer;
+  margin-right: 20px;
+  font-size: 1.5em;
+}
+
+.icon-user {
+  margin-left: 20px;
+}
+.course-batch-tab {
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.course-header h5 {
+  margin: 0;
+  font-size: 18px;
+  color: #070505;
+}
+
+.batch-tab button {
+  display: block;
+  margin: 10px 0;
+}
+
+.student-attendance {
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}
+
+.attendance-header, .attendance-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  color:#070505
+}
+
+.attendance-row div {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.attendance-row input {
+  width: 100%;
+}
