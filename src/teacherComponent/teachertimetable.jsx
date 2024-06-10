@@ -15,7 +15,7 @@ const TeacherTimetable = () => {
       fetch(`http://localhost:8080/teachersessions?name=${teacherId}`)
   .then(response => response.json())
   .then(data => {
-    console.log(data);
+   
       setTimetableData(data);
     })
     .catch(error => console.error('Error fetching session data:', error));

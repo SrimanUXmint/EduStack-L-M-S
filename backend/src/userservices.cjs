@@ -6,12 +6,14 @@ const BatchData = require('./batchModel.cjs');
 const Attendance = require('./attendanceModel.cjs');
 const LeaveData = require('./leaveModel.cjs');
 const QuizData = require('./quizModel.cjs');
+const NoticeData = require('./noticeModel.cjs');
+const GradeData = require('./gradeModel.cjs');
 
 const getProgressDataService = async (teacherId) => {
     try {
         // Fetch courses taught by the teacher
         const teachers = await TeacherData.find({ teacherId });
-        
+       
         // Collect all batch IDs taught by the teacher
         const batchIds = teachers.reduce((acc, teacher) => {
             acc.push(...teacher.batchIds);
@@ -20,7 +22,7 @@ const getProgressDataService = async (teacherId) => {
 
         // Fetch batch data for all collected batch IDs
         const batches = await BatchData.find({ batchId: { $in: batchIds } });
-        
+        console.log(batchIds);
         // Create progress data from batches
         const progressData = [];
         batches.forEach(batch => {
@@ -132,6 +134,36 @@ const getLeavesByTeacherService = async (name) => {
         console.error('Error fetching student profile data:', error.message);
     }
 };
+  const getcourseDataService = async (studentId) => {
+    try {
+        // Find the student
+        const student = await StudentData.findOne({ studentId });
+        if (!student) {
+          throw new Error('Student not found');
+        }
+    
+        // Find the batch of the student
+        const batch = await BatchData.findOne({ batchId: student.batch });
+        if (!batch) {
+          throw new Error('Batch not found');
+        }
+    
+        // Retrieve course details for courses belonging to the student's batch
+        const courses = await CourseData.find({ courseId: { $in: batch.courseIds } });
+    
+        // Construct the response object
+        const courseData = {
+          courses: courses,
+          batchName: batch// Add the batchName here
+        };
+    
+       
+        return courseData;
+      } catch (error) {
+        console.error('Error fetching student profile data:', error.message);
+        throw error; // Propagate the error to the caller
+      }
+    };
   const getProfileDataService = async (studentId) => {
     try {
         const student = await StudentData.findOne({ studentId });
@@ -188,50 +220,36 @@ const getstudentattendanceService = async (studentId) => {
                 attendancePercentage: (studentAttendance.present / course.duration) * 100,
             });
         }
-        console.log(attendanceRecords);
+  
         return attendanceRecords;
     } catch (error) {
         console.error('Error fetching student attendance:', error.message);
         throw error;
     }
 };
-  const getstudentProgressDataService = async (studentId) => {
+const getstudentProgressDataService = async (studentId) => {
     try {
         // Find the student by studentId
         const student = await StudentData.findOne({ studentId });
+        if (!student) throw new Error('Student not found');
 
-        if (!student) {
-            throw new Error('Student not found');
-        }
-
-        // Fetch the batch for the student
         const batch = await BatchData.findOne({ batchId: student.batch });
+        if (!batch) throw new Error('Batch not found for the student');
 
-        if (!batch) {
-            throw new Error('Batch not found for the student');
-        }
-
-        // Fetch attendance data for the student's batch
-        const attendance = await Attendance.findOne({ batchId: student.batch });
-
-        if (!attendance) {
-            throw new Error('Attendance data not found for the student\'s batch');
-        }
+        const attendance = await Attendance.find({ batchId: student.batch, 'students.studentId': studentId });
+        if (!attendance) throw new Error('Attendance data not found for the batch');
 
         // Initialize an empty array to store progress data
         const progressData = [];
 
         // Iterate over the courseIds in the student's batch
         for (const courseId of batch.courseIds) {
-            // Find the course details by courseId
             const course = await CourseData.findOne({ courseId });
+            if (!course) continue;
 
-            if (!course) {
-                continue; // Skip to the next course if the current one is not found
-            }
-
-            // Find the student's attendance for the current course
-            const studentAttendance = attendance.students.find(student => student.studentId === studentId);
+            const studentAttendance = attendance.find(a => a.courseId === courseId).students.find(s => s.studentId === studentId);
+            if (!studentAttendance) continue;
+            console.log('Student Attendance for Course:', studentAttendance);
 
             // Calculate attendance percentage
             const attendancePercentage = studentAttendance ? (studentAttendance.present / parseInt(course.duration)) * 100 : 0;
@@ -239,20 +257,17 @@ const getstudentattendanceService = async (studentId) => {
             // Push the progress data for the current course
             progressData.push({
                 value: parseInt(attendancePercentage),
-                label: `${course.courseName} `
+                label: `${course.courseName}`
             });
         }
 
+        console.log('Progress Data:', progressData);
         return progressData;
     } catch (error) {
-        if (error.message.includes('Batch not found for the student')) {
-            return Array(batch.courseIds.length).fill(0);
-        } else {
-            throw new Error('Error fetching progress data: ' + error.message);
-        }
+        console.error('Error fetching progress data:', error.message);
+        throw new Error('Error fetching progress data: ' + error.message);
     }
 };
-
 
 
 const getstudentSessionsService = async (studentId) => {
@@ -412,7 +427,7 @@ const createUserDBService = (userDetails) => {
         const userModelData = new UserData(userDetails);
         userModelData.save()
             .then(result => {
-                console.log(result);
+              
                 resolve(true);
             })
             .catch(err => {
@@ -425,7 +440,7 @@ const createUserDBService = (userDetails) => {
 const getAttendanceByCourseAndBatch = async (courseId, batchId) => {
     try {
         const attendance = await Attendance.findOne({ courseId, batchId });
-        console.log(attendance);
+        
         return attendance ? attendance.students : [];
     } catch (err) {
         console.error(err);
@@ -550,6 +565,75 @@ const getCoursesService = async () => {
     }
 };
 
+const getCourseidService = async (courseId, studentId) => {
+    try {
+        // Fetch course details
+        const course = await CourseData.findOne({ courseId });
+    
+        if (!course) {
+            throw new Error('Course not found');
+        }
+
+        // Fetch student details
+        const student = await StudentData.findOne( studentId  );
+        if (!student) {
+            throw new Error('Student not found');
+        }
+
+        // Fetch the batch for the student
+        const batch = await BatchData.findOne({ batchId: student.batch });
+
+        if (!batch) {
+            throw new Error('Batch not found for the student');
+        }
+
+        // Fetch notices related to the course
+        const notices = await NoticeData.find({ courseId, batchId: student.batch });
+
+        // Fetch quizzes based on the courses associated with the student's batch
+        const quizzes = await QuizData.find({ courseId, batchId: student.batch });
+
+        // Fetch grades related to the course and student
+        let grades = [];
+        const id=student.studentId;
+     
+        try {
+            grades = await GradeData.find({ courseId, studentId:id });
+        } catch (e) {
+            // Handle error if needed
+        }
+       
+        // Map the grades to quizzes ensuring we get the latest grade
+        const quizzesWithGrades = quizzes.map(quiz => {
+            const quizGrades = grades.filter(grade => grade.batchId === quiz.batchId && grade.courseId === quiz.courseId);
+            const latestGrade = quizGrades.length > 0 ? quizGrades[quizGrades.length - 1] : null;
+
+            return {
+                title: quiz.quizName,
+                time: quiz.quizTime,
+                quizId:quiz.quizId,
+                grade: latestGrade ? latestGrade.grade : null,
+                link: quiz.link,
+                gradedMarks: latestGrade ? latestGrade.gradedMarks : null
+            };
+        });
+
+        // Construct the response object
+        const courseDetails = {
+            id: course.courseId,
+            name: course.courseName,
+            notices: notices.map(notice => ({ title: notice.title, content: notice.content })),
+            quizzes: quizzesWithGrades,
+        };
+
+        return courseDetails;
+    } catch (err) {
+        console.error(err);
+        throw err;
+    }
+};
+
+
 const getBatchesService = async () => {
     try {
         const batches = await BatchData.find({});
@@ -616,7 +700,7 @@ const getCoursesByTeacherService = async (teacherId) => {
     try {
       // Find the student with the given studentId
       const student = await StudentData.findOne({ studentId });
-        console.log(studentId);
+       
       if (!student) {
         throw new Error('Student not found');
       }
@@ -626,7 +710,7 @@ const getCoursesByTeacherService = async (teacherId) => {
   
       // Fetch timetable data for the batch
       const timetables = await TimetableData.find({ batchId }).sort({ lastUpdated: -1 });
-      console.log(timetables);
+    
       return timetables;
     } catch (err) {
       console.error(err);
@@ -661,6 +745,8 @@ module.exports = {
     getstudentSessionsService,
     getProfileDataService,
     getteacherProfileDataService,
-    getstudentTimetableService
+    getstudentTimetableService,
+    getCourseidService,
+    getcourseDataService
 
 };

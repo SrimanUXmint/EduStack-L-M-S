@@ -9,7 +9,7 @@ const Quizes=({quizdata})=>{
             <div className="e7hten5c">{item.quiztime}</div>
           </div>
         </div>
-        <div className="yqlhntmk">{item.quizname}</div>
+        <div className="yqlhntmk">{item.quiz}</div>
       </div>
       
       ))}

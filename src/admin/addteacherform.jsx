@@ -72,6 +72,7 @@ const AddTeacherForm = ({ onAddTeacher, batches, courses }) => {
         ...prevData,
         batchIds: selectedBatchIds,
       }));
+     
     } else {
       setTeacherData(prevData => ({
         ...prevData,
@@ -89,7 +90,7 @@ const AddTeacherForm = ({ onAddTeacher, batches, courses }) => {
       console.error('Error adding teacher', error);
     }
   };
-
+console.log(batches);
   return (
     <Form onSubmit={handleSubmit}>
       <Input
@@ -132,7 +133,7 @@ const AddTeacherForm = ({ onAddTeacher, batches, courses }) => {
       </Select>
       <Select name="batchIds" value={teacherData.batchIds} onChange={handleChange} multiple required>
         {batches.map(batch => (
-          <option key={batch._id} value={batch.batchIds}>{batch.batchName}</option>
+          <option key={batch._id} value={batch.batchId}>{batch.batchName}</option>
         ))}
       </Select>
       <Button type="submit">Add Teacher</Button>

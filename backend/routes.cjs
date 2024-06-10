@@ -11,6 +11,7 @@ router.post('/teacher/add', userController.addTeacherControllerFn);
 router.post('/courses', userController.addCourseControllerFn);
 router.post('/batches', userController.addBatchControllerFn);
 router.get('/courses', userController.getCoursesControllerFn);
+router.get('/course/:id', userController.getCourseidControllerFn);
 router.get('/batches', userController.getBatchesControllerFn);
 router.get('/students', userController.getStudentsControllerFn);
 router.get('/teachers', userController.getTeachersControllerFn);
@@ -42,9 +43,10 @@ router.get('/quizzes', userController.getQuizzesControllerFn);
 router.post('/grades', userController.addGradeControllerFn);
 router.get('/grades', userController.getGradesControllerFn);
 router.get('/profiledata', userController.getProfileDataControllerFn);
+router.get('/coursedata', userController.getcourseDataControllerFn);
 router.get('/teacherprofiledata', userController.getteacherProfileDataControllerFn);
 router.get('/student/attendance/:studentId', userController.getstudentattendanceControllerFn);
 // routes.js
 router.get('/studenttimetable/:studentId', userController.getstudentTimetableControllerFn);
-
+router.post('/grades/attempt', userController.attemptQuizControllerFn);
 module.exports = router;

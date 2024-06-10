@@ -6,7 +6,7 @@ module.exports.createTeacherService = (teacherDetails) => {
 
         teacherModelData.save()
             .then(result => {
-                console.log(result);
+                (result);
                 resolve(true); // Resolve the promise with true indicating success
             })
             .catch(err => {

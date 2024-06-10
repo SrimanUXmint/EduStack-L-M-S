@@ -7048,7 +7048,7 @@ figcaption {
 
 .p6astchp {
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   width: auto;
   padding: 28px 0 0;

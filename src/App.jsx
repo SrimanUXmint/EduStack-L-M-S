@@ -18,7 +18,7 @@ function App() {
   const notificationRef = useRef();
   const userPanelRef = useRef();
   const location = useLocation();
-
+  const userid = localStorage.getItem('userName');
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
@@ -137,7 +137,7 @@ function App() {
                   {userPanelOpen && (
                     <div className="user-dropdown dropdown">
                       <ul className="user-dropdown-content">
-                        <li>Welcome, {profileData.name}!</li>
+                        <li>Welcome, {userid}!</li>
                         <li><Link style={{ color:"#070505",textDecoration:"none"}} to="/profile">Profile</Link></li>
                         <li><Link style={{ color:"#070505",textDecoration:"none"}} onClick={handlelogout} to="/signin">Logout</Link></li>
                       </ul>
@@ -223,9 +223,7 @@ function App() {
           
         </div>
       </div>
-      <div className="w-embed"></div>
     </>
   );
 }
-
 export default App;

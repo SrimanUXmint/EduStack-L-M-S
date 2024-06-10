@@ -29,7 +29,6 @@ const getNoticesControllerFn = async (req, res) => {
     }
 };
 
-// Add Quiz
 const addQuizControllerFn = async (req, res) => {
     try {
         const newQuiz = new QuizData(req.body);
@@ -42,22 +41,34 @@ const addQuizControllerFn = async (req, res) => {
 
 const getQuizzesControllerFn = async (req, res) => {
     try {
-        const quizzes = await QuizData.find({ courseId: req.query.courseId, batchId: req.query.batchId });
-        res.status(200).json(quizzes);
+        const { courseId, batchId } = req.query;
+        const quizzes = await QuizData.find({ courseId, batchId });
+
+        const quizzesWithStudents = await Promise.all(quizzes.map(async (quiz) => {
+            const grades = await GradeData.find({ quizId: quiz.quizId }); // Use quizId for finding grades
+            return {
+                ...quiz._doc,
+                students: grades.map(grade => ({
+                    studentId: grade.studentId,
+                    grade: grade.grade,
+                    gradedMarks: grade.gradedMarks
+                }))
+            };
+        }));
+
+        res.status(200).json(quizzesWithStudents);
     } catch (error) {
         res.status(500).send('Error fetching quizzes: ' + error.message);
     }
 };
-
-// Add Grade
 const addGradeControllerFn = async (req, res) => {
     try {
         const { courseId, batchId, grades } = req.body;
         for (const grade of grades) {
             await GradeData.findOneAndUpdate(
-                { courseId, batchId, studentId: grade.studentId },
-                { grade: grade.grade },
-                { upsert: true }
+                { courseId, batchId, studentId: grade.studentId, quizId: grade.quizId },
+                { grade: grade.grade, gradedMarks: grade.gradedMarks },
+                { upsert: true, new: true }
             );
         }
         res.status(201).send('Grades added/updated successfully');
@@ -111,6 +122,20 @@ const getProfileDataControllerFn = async (req, res) => {
         }
         // Fetch progress data for the teacher with the specified name
         const progressData = await userService.getProfileDataService(name);
+        res.status(200).json(progressData);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+const getcourseDataControllerFn = async (req, res) => {
+    try {
+        const { name } = req.query;
+        if (!name) {
+            return res.status(400).json({ message: 'Name parameter is required' });
+        }
+        // Fetch progress data for the teacher with the specified name
+        const progressData = await userService.getcourseDataService(name);
         res.status(200).json(progressData);
     } catch (error) {
         console.error(error.message);
@@ -373,6 +398,23 @@ const getCoursesControllerFn = async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 };
+const getCourseidControllerFn = async (req, res) => {
+    try {
+        const courseId = req.params.id;
+        const studentId = req.query;
+        const course = await userService.getCourseidService(courseId,studentId);
+        
+        if (!course) {
+            return res.status(404).json({ message: 'Course not found' });
+        }
+        
+        res.status(200).json(course);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
 
 const getBatchesControllerFn = async (req, res) => {
     try {
@@ -508,6 +550,29 @@ const getstudentTimetableControllerFn = async (req, res) => {
     }
   };
   
+  const attemptQuizControllerFn = async (req, res) => {
+    try {
+        const { courseId, batchId, studentId, quizId } = req.body;
+
+        // Find and update the existing record or create a new one
+        await GradeData.findOneAndUpdate(
+            { courseId, batchId, studentId, quizId },
+            { 
+                courseId,
+                batchId,
+                studentId,
+                quizId,
+                grade: null, // Initial grade as null
+                gradedMarks: null // Initial graded marks as null
+            },
+            { upsert: true, new: true }
+        );
+
+        res.status(201).send('Quiz attempt recorded successfully');
+    } catch (error) {
+        res.status(500).send('Error recording quiz attempt: ' + error.message);
+    }
+};
 module.exports = {
     createUserControllerFn,
     addStudentControllerFn,
@@ -545,6 +610,9 @@ module.exports = {
     addGradeControllerFn,
     getGradesControllerFn,
     getProfileDataControllerFn,
+    getcourseDataControllerFn,
     getteacherProfileDataControllerFn,
-    getstudentTimetableControllerFn
+    getstudentTimetableControllerFn,
+    getCourseidControllerFn,
+    attemptQuizControllerFn
 };

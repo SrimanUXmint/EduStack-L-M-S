@@ -1,5 +1,5 @@
 import Attendancetemp from './attendacetemplate';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 export default function Attendance() {
   const [attendancedata, setAttendanceData] = useState([]);
   const studentId = localStorage.getItem('userName'); // Replace with dynamic student ID

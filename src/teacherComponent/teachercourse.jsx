@@ -12,6 +12,7 @@ const TeacherCourse = () => {
   const [batches, setBatches] = useState([]);
   const teacherId = localStorage.getItem('userName');
 
+
   useEffect(() => {
     const fetchTeacherData = async () => {
       try {

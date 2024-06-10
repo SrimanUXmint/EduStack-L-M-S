@@ -1,4 +1,4 @@
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import CourseBatchTab from './admincoursebatchtab';
 import axios from 'axios';
 
@@ -15,9 +15,9 @@ export default function AdminAttendance() {
       const courses = response.data;
 
       const updatedCourses = await Promise.all(courses.map(async course => {
-        const batchesResponse = await axios.get(`http://localhost:8080/batches?courseId=${course._id}`);
-        const batches = batchesResponse.data;
-
+        const batchesResponse = await axios.get('http://localhost:8080/batches');
+        const batches = batchesResponse.data.filter(batch => batch.courseIds.includes(course.courseId));
+        
         const updatedBatches = await Promise.all(batches.map(async batch => {
           const studentsResponse = await axios.get(`http://localhost:8080/studentsattendance?courseId=${course.courseId}&batchId=${batch.batchId}`);
           const students = studentsResponse.data;
@@ -35,17 +35,14 @@ export default function AdminAttendance() {
 
   const updateStudentAttendance = async (courseId, batchId, studentId, present) => {
     try {
-      console.log(courseId,batchId);
       await axios.put(`http://localhost:8080/attendance/${courseId}/${batchId}/${studentId}`, { present });
       setAttendanceData(prevData =>
         prevData.map(course => {
-          if (course._id === courseId) {
-            
+          if (course.courseId === courseId) {
             return {
               ...course,
               batches: course.batches.map(batch => {
-                if (batch._id === batchId) {
-                  
+                if (batch.batchId === batchId) {
                   const updatedStudents = batch.students.map(student => {
                     if (student.studentId === studentId) {
                       return { ...student, present };

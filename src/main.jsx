@@ -74,7 +74,7 @@ const AppWithTokenCheck = () => {
         <Route path="/teacherattendance" element={<RoleBasedRoute roles={['teacher']} element={<><TeacherAttendance /><TeacherApp /></>} />} />
         <Route path="/teachertimetable" element={<RoleBasedRoute roles={['teacher']} element={<><TeacherTimetable /><TeacherApp /></>} />} />
         <Route path="/teachercourse" element={<RoleBasedRoute roles={['teacher']} element={<><TeacherCourse /><TeacherApp /></>} />} />
-        <Route path="/course/:courseid" element={<RoleBasedRoute roles={['teacher']} element={<><CoursePage /><TeacherApp /></>} />} />
+        <Route path="/course/:courseid" element={<RoleBasedRoute roles={['student']} element={<><CoursePage /><App /></>} />} />
       </Routes>
     </Router>
   );

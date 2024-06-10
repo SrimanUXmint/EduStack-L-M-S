@@ -18,7 +18,7 @@ const AdminProfile = () => {
       
       if (!response.ok) throw new Error('Failed to fetch leave requests');
       const data = await response.json();
-      console.log(data);
+     
       setLeaveRequests(data);
     } catch (error) {
       console.error('Error fetching leave requests:', error.message);
@@ -26,7 +26,7 @@ const AdminProfile = () => {
   };
 
   const handleUpdateStatus = async (leaveId, newStatus) => {
-    console.log(newStatus);
+
     try {
       const response = await fetch(`http://localhost:8080/leave/status`, {
         method: 'PUT',

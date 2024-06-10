@@ -22,7 +22,7 @@ function TeacherDashboard() {
           .then(response => response.json())
           .then(data => setProfileData({ email:data.email,name:data.name }))
           .catch(error => console.error('Error fetching progress data:', error));
-      
+       
     // Fetch data for ProgressBar
     fetch(`http://localhost:8080/teacherprogress?name=${userid}`)
       .then(response => response.json())
@@ -132,8 +132,8 @@ function TeacherDashboard() {
                   <div className="zpbliu54">{profileData.name}</div>
                   <h4 style={{ color: "black" }}>{profileData.email}</h4>
                 </div>
-                <div className="b8s514yo" style={{ height: "300px", paddingBottom: "3px" }}>
-                  <Calendar onChange={handleDateChange} value={selectedDate} />
+                <div className="b8s514yo" style={{ height: "300px", paddingBottom: "3px",width:"350px"}}>
+                <Calendar onChange={handleDateChange} value={selectedDate}  />
                 </div>
                 <div className="cvio0a0i">
                   <h2 className="ozi9ds6z">Leaves</h2>

@@ -6,7 +6,7 @@ import StudentAttendance from './teacherattendacetemplate';
 const CourseBatchTab = ({ course, updateStudentAttendance }) => {
   const [activeBatch, setActiveBatch] = useState(null);
   const [localStudents, setLocalStudents] = useState({});
-  // console.log(course);
+
   useEffect(() => {
     const initialLocalStudents = {};
     course.batches.forEach(batch => {

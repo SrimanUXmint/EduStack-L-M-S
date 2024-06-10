@@ -11,7 +11,7 @@ const Circle = ({ value, label }) => {
   const offset = circumference - (value / 100) * circumference;
 
   return (
-    <div className="circle-wrap">
+    <div className="circle-wrap" style={{justifyContent:"space-evenly"}}>
       <svg className="circle" width="80" height="80">
   <circle
     className="circle-background"
