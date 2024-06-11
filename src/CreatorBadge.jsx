@@ -11,7 +11,7 @@ const CreatorBadge = () => {
     fontFamily: 'ui-sans-serif',
     fontSize: '14px',
     boxShadow: '0 0 10px rgba(0,0,0,0.2)',
-    textDecoration: 'none', // Ensure the link looks like a badge
+    textDecoration: 'none', 
     display: 'flex',
     alignItems: 'center',
     justifyContent:"center"
