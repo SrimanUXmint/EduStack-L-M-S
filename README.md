@@ -23,56 +23,56 @@ The MERN Stack Learning Management System (LMS) is a comprehensive platform desi
 
 **1. A real landing page **
 
-![Landing page](Screenshots\image.png)
+![Landing page](Screenshots/image.png)
 
 **2. Admin dashboard**
 
-![dmin dashboard](Screenshots\image-8.png)
+![dmin dashboard](Screenshots/image-8.png)
 **3. Admin leave tab**
-![leave tab](Screenshots\image-2.png)
-![2tab](Screenshots\image-3.png)
+![leave tab](Screenshots/image-2.png)
+![2tab](Screenshots/image-3.png)
 **4. Admin Attendance**
 
-![admin attendance](Screenshots\image-4.png)
+![admin attendance](Screenshots/image-4.png)
 **5. Admin timetable**
-![timetable](Screenshots\image-5.png)
-![tab2](Screenshots\image-6.png)
-![tab3](Screenshots\image-7.png)
+![timetable](Screenshots/image-5.png)
+![tab2](Screenshots/image-6.png)
+![tab3](Screenshots/image-7.png)
 **6. Admin Add student and teachers**
-![add](Screenshots\image-9.png)
+![add](Screenshots/image-9.png)
 
 **7. Admin Add course and batch**
-![add course](Screenshots\image-10.png)
+![add course](Screenshots/image-10.png)
 
 **1. Teacher dashboard**
 
-![teacher dasboard](Screenshots\image-11.png)
-![tab2](Screenshots\image-12.png)
+![teacher dasboard](Screenshots/image-11.png)
+![tab2](Screenshots/image-12.png)
 **2. Teacher Leave**
-![leave](Screenshots\image-13.png)
-![tab](Screenshots\image-14.png)
+![leave](Screenshots/image-13.png)
+![tab](Screenshots/image-14.png)
 **3. Teacher Attendance**
-![attendance](Screenshots\image-15.png)
+![attendance](Screenshots/image-15.png)
 **4. Teacher Timetable**
-![timetable](Screenshots\image-16.png)
+![timetable](Screenshots/image-16.png)
 **5. Teacher course**
-![tab1](Screenshots\image-17.png)
-![tab2](Screenshots\image-18.png)
-![tab3](Screenshots\image-19.png)
+![tab1](Screenshots/image-17.png)
+![tab2](Screenshots/image-18.png)
+![tab3](Screenshots/image-19.png)
 
 **1. Student dashboard**
-![student](Screenshots\image-20.png)
+![student](Screenshots/image-20.png)
 
 **1. Student Profile**
-![profile](Screenshots\image-21.png)
+![profile](Screenshots/image-21.png)
 
 **1. Student Attendance**
-![profile](Screenshots\image-22.png)
+![profile](Screenshots/image-22.png)
 **1. Student timetable**
-![timetable](Screenshots\image-23.png)
+![timetable](Screenshots/image-23.png)
 **1. Student course**
-![course](Screenshots\image-24.png)
-![coursepage](Screenshots\image-25.png)
+![course](Screenshots/image-24.png)
+![coursepage](Screenshots/image-25.png)
 
 
 
