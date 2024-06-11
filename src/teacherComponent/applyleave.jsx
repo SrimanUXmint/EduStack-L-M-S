@@ -11,9 +11,7 @@ const ApplyLeave = () => {
 
   const [leaveHistory, setLeaveData] = useState([]);
   useEffect(() => {
-    const userId = localStorage.getItem('userName'); // Hardcoded for testing, replace with actual user ID
-
-    // Fetch leave history data for the user
+    const userId = localStorage.getItem('userName'); 
     fetch(`http://localhost:8080/teacherleaves?name=${userId}`)
       .then(response => response.json())
       .then(data => setLeaveData(data))

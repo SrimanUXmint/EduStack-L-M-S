@@ -8,7 +8,7 @@ const GradeQuiz = () => {
     const [grades, setGrades] = useState([]);
     const [selectedCourse, setSelectedCourse] = useState('');
     const [selectedBatch, setSelectedBatch] = useState('');
-    const teacherId = localStorage.getItem('userName'); // Assuming this is the teacher ID
+    const teacherId = localStorage.getItem('userName'); 
 
     useEffect(() => {
         const fetchCourses = async () => {

@@ -24,9 +24,6 @@ const Signin = () => {
       localStorage.setItem("role", res.role);
       localStorage.setItem("userName", res.username);
       localStorage.setItem("userEmail", res.email);
-        // Store the role in localStorage
-       
-      // Redirect based on role
       switch (res.role) {
         case 'admin':
           window.location = "/admin";

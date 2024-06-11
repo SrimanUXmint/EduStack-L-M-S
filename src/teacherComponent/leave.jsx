@@ -4,13 +4,13 @@ const Leave = ({ event }) => {
   const getStatusStyle = (status) => {
     switch (status) {
       case 'Approved':
-        return { color: 'green', backgroundColor: '#ccffcc' }; // Light green background
+        return { color: 'green', backgroundColor: '#ccffcc' };
       case 'Rejected':
-        return { color: 'red', backgroundColor: '#ffcccc' }; // Light red background
+        return { color: 'red', backgroundColor: '#ffcccc' }; 
       case 'Pending':
-        return { color: 'orange', backgroundColor: '#ffe5cc' }; // Light orange background
+        return { color: 'orange', backgroundColor: '#ffe5cc' }; 
       default:
-        return { color: 'black', backgroundColor: '#e0e0e0' }; // Light grey background
+        return { color: 'black', backgroundColor: '#e0e0e0' }; 
     }
   };
 
