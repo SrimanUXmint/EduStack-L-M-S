@@ -10,9 +10,9 @@
 </p>
 <p align="center">
   <b>
-    <a href="https://courselit.app">Website</a> |
-    <a href="https://docs.courselit.app">Documentation</a> | 
-    <a href="https://honey-oviraptor-4b7.notion.site/4a82d434ff2e485c8eb4b22f13252fef?v=9873e6e4812c420ab6a5cd81eca11356">Roadmap</a>
+    <a href="https://anubhavchaudhary.42web.io">Website</a> |
+    <a href="">Documentation</a> | 
+    <a href="">Roadmap</a>
   </b>
 </p>
 
