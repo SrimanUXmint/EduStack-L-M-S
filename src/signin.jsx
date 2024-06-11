@@ -1,9 +1,22 @@
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import axios from 'axios';
 
 
 
 const Signin = () => {
+  useEffect(() => {
+    const firsttime = async () => {
+      try {
+        const url = "http://localhost:8080/signup";
+        await axios.post(url, {
+        });
+        console.log("Admin user created");
+      } catch (error) {
+        console.error("Error creating admin user", error);
+      }
+    };
+    firsttime();
+  }, []);
   const [data, setData] = useState({
     username: "",
     password: ""

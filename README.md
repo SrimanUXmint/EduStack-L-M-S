@@ -137,9 +137,9 @@ Can view Notices , View quiz , Attempt quiz  , See grades
 ## Demo & Credentials
 Demo Link : https://www.ulearnpro.com/demo/
 
-|    Role       |        Email ID        |   Password    |
+|    Username   |        Email ID        |   Password    |
 | ------------- | ---------------------  | ------------- |
-|    admin      | admin@gmail.com        |    123        |
+|    admin      | admin@gmail.com        |    admin      |
 |    TUT1       | tut1@gmail.com         |    123        |
 |    TUT2       | tut2@gmail.com         |    123        |
 |    TUT3       | tut3@gmail.com         |    123        |
@@ -219,15 +219,7 @@ create database named 'Lms'
 ```
 
 ```bash
-create collection name 'userdatas'
-```
-
-```bash
-import Lms.userdatas.json file data to that collection
-```
-
-```bash
-now you can able to sign in as admin 
+now you can able to sign in as admin using username and password
 ```
 ```bash
 create 1 courses 

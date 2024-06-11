@@ -428,24 +428,26 @@ const getBatchesControllerFn = async (req, res) => {
 
 const signUp = async (req, res) => {
     try {
-        const { username, email, password, role } = req.body;
+        const adminExists = await UserData.findOne({ role: 'admin' });
 
-        let existingUser = await UserData.findOne({ email });
-        if (existingUser) {
-            return res.status(400).json({ message: 'User already exists' });
+        if (!adminExists) {
+            const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash("admin", salt);
+            const adminUser = new UserData({
+                username: 'admin',
+                email: 'admin@example.com',
+                password: hashedPassword,
+                role: 'admin'
+            });
+
+            await adminUser.save();
+            console.log('Admin user created successfully');
+        } else {
+            console.log('Admin user already exists');
         }
-
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
-
-        const newUser = new UserData({ username, email, password: hashedPassword, role });
-
-        await newUser.save();
-        res.status(201).json({ message: 'User created successfully', user: newUser });
     } catch (error) {
-        console.error(error.message);
-        res.status(500).json({ message: 'Internal server error' });
-    }
+        console.error('Error creating admin user:', error);
+    } 
 };
 const addTimetableControllerFn = async (req, res) => {
     try {
