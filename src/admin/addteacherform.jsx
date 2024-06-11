@@ -90,7 +90,7 @@ const AddTeacherForm = ({ onAddTeacher, batches, courses }) => {
       console.error('Error adding teacher', error);
     }
   };
-console.log(batches);
+
   return (
     <Form onSubmit={handleSubmit}>
       <Input

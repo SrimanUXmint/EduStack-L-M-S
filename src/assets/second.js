@@ -1,11 +1,3 @@
-/*!
- * Webflow: Front-end site library
- * @license MIT
- * Inline scripts may access the api using an async handler:
- *   var Webflow = Webflow || [];
- *   Webflow.push(readyFunction);
- */
-
 (() => {
   var __create = Object.create;
   var __defProp = Object.defineProperty;
@@ -1259,7 +1251,7 @@
       var tram = require_tram_min() && $.tram;
       module2.exports = (function () {
         var _ = {};
-        _.VERSION = "1.6.0-Webflow";
+        
         var breaker = {};
         var ArrayProto = Array.prototype,
           ObjProto = Object.prototype,
@@ -1522,7 +1514,7 @@
     },
   });
 
-  // packages/shared/render/plugins/BaseSiteModules/webflow-lib.js
+
   var require_webflow_lib = __commonJS({
     "packages/shared/render/plugins/BaseSiteModules/webflow-lib.js"(
       exports2,

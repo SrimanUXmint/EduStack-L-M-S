@@ -16,8 +16,8 @@ mongoose.connect("mongodb://localhost:27017/Lms",{ useNewUrlParser: true, useUni
   console.error('Error connecting to MongoDB:', err.message);
 });
 
-server.use(cors({// Allow requests from this origin
-  credentials: true, // Allow cookies to be sent and received across origins
+server.use(cors({
+  credentials: true,
 }));
 
 server.use(cookieParser());

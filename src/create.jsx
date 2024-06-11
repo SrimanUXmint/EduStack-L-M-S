@@ -16,7 +16,7 @@ const handleSubmit= async (e)=>{
   try{
     const url="http://localhost:8080/login"
     const {data:res}=await axios.post(url,data);
-    console.log(res.message);
+  
     navigate("/singin")
   }catch(error){
     if(error.response && error.response.status>=400 && error.response.status<=500){

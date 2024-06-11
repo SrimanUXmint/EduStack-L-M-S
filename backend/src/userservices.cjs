@@ -22,7 +22,7 @@ const getProgressDataService = async (teacherId) => {
 
         // Fetch batch data for all collected batch IDs
         const batches = await BatchData.find({ batchId: { $in: batchIds } });
-        console.log(batchIds);
+
         // Create progress data from batches
         const progressData = [];
         batches.forEach(batch => {
@@ -249,7 +249,7 @@ const getstudentProgressDataService = async (studentId) => {
 
             const studentAttendance = attendance.find(a => a.courseId === courseId).students.find(s => s.studentId === studentId);
             if (!studentAttendance) continue;
-            console.log('Student Attendance for Course:', studentAttendance);
+        
 
             // Calculate attendance percentage
             const attendancePercentage = studentAttendance ? (studentAttendance.present / parseInt(course.duration)) * 100 : 0;
@@ -607,12 +607,11 @@ const getCourseidService = async (courseId, studentId) => {
         const quizzesWithGrades = quizzes.map(quiz => {
             const quizGrades = grades.filter(grade => grade.batchId === quiz.batchId && grade.courseId === quiz.courseId);
             const latestGrade = quizGrades.length > 0 ? quizGrades[quizGrades.length - 1] : null;
-
             return {
                 title: quiz.quizName,
                 time: quiz.quizTime,
                 quizId:quiz.quizId,
-                grade: latestGrade ? latestGrade.grade : null,
+                grade: latestGrade ? latestGrade.grade : quiz.grade,
                 link: quiz.link,
                 gradedMarks: latestGrade ? latestGrade.gradedMarks : null
             };

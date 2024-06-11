@@ -2,7 +2,6 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('./src/usercontrol.cjs');
-
 router.post('/user/create', userController.createUserControllerFn);
 router.post('/signup', userController.signUp);
 router.post('/login', userController.login);
@@ -30,23 +29,18 @@ router.get('/studentprogress', userController.getstudentProgressDataControllerFn
 router.get('/studentsessions', userController.getstudentSessionsControllerFn);
 router.get('/studentfaculty', userController.getstudentfacultyControllerFn);
 router.get('/studentquizes', userController.getstudentquizesControllerFn);
-// routes.js
 router.get('/teacher/courses', userController.getCoursesByTeacherControllerFn);
 router.get('/teacher/batches', userController.getBatchesTeacherControllerFn);
-
 router.post('/notices', userController.addNoticeControllerFn);
 router.get('/notices', userController.getNoticesControllerFn);
-
 router.post('/quizzes', userController.addQuizControllerFn);
 router.get('/quizzes', userController.getQuizzesControllerFn);
-
 router.post('/grades', userController.addGradeControllerFn);
 router.get('/grades', userController.getGradesControllerFn);
 router.get('/profiledata', userController.getProfileDataControllerFn);
 router.get('/coursedata', userController.getcourseDataControllerFn);
 router.get('/teacherprofiledata', userController.getteacherProfileDataControllerFn);
 router.get('/student/attendance/:studentId', userController.getstudentattendanceControllerFn);
-// routes.js
 router.get('/studenttimetable/:studentId', userController.getstudentTimetableControllerFn);
 router.post('/grades/attempt', userController.attemptQuizControllerFn);
 module.exports = router;

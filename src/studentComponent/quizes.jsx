@@ -3,7 +3,7 @@ const Quizes=({quizdata})=>{
     return (
       <>
       {quizdata.map((item,index)=>(
-        <div className="p6astchp">
+        <div className="p6astchp" key={index}>
         <div className="xjnr96zm">
           <div className="p6x2ftjb">
             <div className="e7hten5c">{item.quiztime}</div>

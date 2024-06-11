@@ -7,8 +7,8 @@ const AddQuiz = ({ courseId, batchId }) => {
     const [quizTime, setQuizTime] = useState('');
     const [grade, setGrade] = useState('');
     const [link, setLink] = useState('');
-
     const handleAddQuiz = async () => {
+        
         try {
             const quizId = Date.now().toString().slice(0,5) + Math.floor(Math.random() * 1000).toString();
             await axios.post('http://localhost:8080/quizzes', { courseId, batchId, quizName, quizTime, quizId, grade, link });

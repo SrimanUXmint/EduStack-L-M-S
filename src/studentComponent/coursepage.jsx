@@ -65,7 +65,6 @@ const CoursePage = () => {
   if (!course) {
     return <div>Loading...</div>;
   }
-  
 
   return (
     <>

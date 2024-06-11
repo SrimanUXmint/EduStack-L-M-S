@@ -45,7 +45,6 @@ Coursetemplate.propTypes = {
   coursedata: PropTypes.arrayOf(
     PropTypes.shape({
       courseName: PropTypes.string.isRequired,
-      courseimage: PropTypes.string.isRequired,
       courseId: PropTypes.string.isRequired,
     })
   ).isRequired,
