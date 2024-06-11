@@ -244,7 +244,7 @@ Make sure your npm server is running
 <img src=https://img.shields.io/badge/github-%2324292e.svg?&style=for-the-badge&logo=github&logoColor=white alt=github style="margin-bottom: 5px;" />
 </a>
 <a href="https://www.instagram.com/chaudharyanubhavsinghh/?igshid=MjEwN2IyYWYwYw%3D%3D" target="_blank">
-<img src=https://th.bing.com/th/id/OIP.35sinmuTZc2SK4QKAybZiwHaHa?rs=1&pid=ImgDetMain alt=instagram style="margin-bottom: 5px; max-width:5%" />
+<img src= alt=Instagram style="margin-bottom: 5px; max-width:5%" />
 </a>
 </div>
 
