@@ -215,11 +215,32 @@ mongoose.connect("mongodb://localhost:27017/Lms",{ useNewUrlParser: true, useUni
 ```
 
 ```bash
-npm run dev
+create database named 'Lms'
 ```
 
 ```bash
+create collection name 'userdatas'
+```
+
+```bash
+import Lms.userdatas.json file data to that collection
+```
+
+```bash
+now you can able to sign in as admin 
+```
+```bash
+create 1 courses 
+       2 batches
+       3 then add teachers
+       4 add students 
+       5 now can easily use lms 
+```
+```bash
 node server.cjs
+```
+```bash
+npm run dev
 ```
 
 
