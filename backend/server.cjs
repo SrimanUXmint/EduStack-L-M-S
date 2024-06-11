@@ -10,7 +10,6 @@ const port=process.env.PORT || 8080;
 mongoose.connect("mongodb://localhost:27017/Lms",{ useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => {
   console.log('Connected to MongoDB');
-  // Additional code here if needed
 })
 .catch(err => {
   console.error('Error connecting to MongoDB:', err.message);
