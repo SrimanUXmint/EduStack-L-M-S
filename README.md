@@ -176,7 +176,7 @@ That's it! Now you can dive into the code base.
 - Clone the repo with
 
 ```bash
-git clone https://github.com/Darkhunter674/EduStack-L-M-S.git
+git clone https://github.com/chaudharyanubhavsingh/EduStack-L-M-S
 ```
 
 - install all dependancies
