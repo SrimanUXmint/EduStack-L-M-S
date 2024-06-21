@@ -135,7 +135,7 @@ Can view Notices , View quiz , Attempt quiz  , See grades
     "styled-components": "^6.1.11"
 
 ## Demo & Credentials
-Demo Link : https://www.ulearnpro.com/demo/
+
 
 |    Username   |        Email ID        |   Password    |
 | ------------- | ---------------------  | ------------- |
