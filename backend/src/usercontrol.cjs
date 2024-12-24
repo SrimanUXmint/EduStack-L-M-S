@@ -425,12 +425,12 @@ const getBatchesControllerFn = async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 };
-
+ 
 const signUp = async (req, res) => {
     try {
-        const adminExists = await UserData.findOne({ role: 'admin' });
+       // const adminExists = await UserData.findOne({ role: 'admin' });
 
-        if (!adminExists) {
+        if (!false) {
             const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash("admin", salt);
             const adminUser = new UserData({
