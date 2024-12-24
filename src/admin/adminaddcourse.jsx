@@ -22,10 +22,10 @@ const Adminadd=()=> {
 
   const fetchCoursesAndBatches = async () => {
     try {
-      const coursesResponse = await axios.get('http://localhost:8080/courses');
+      const coursesResponse = await axios.get('http://165.232.185.65:8080/courses');
       setCourses(coursesResponse.data);
 
-      const batchesResponse = await axios.get('http://localhost:8080/batches');
+      const batchesResponse = await axios.get('http://165.232.185.65:8080/batches');
       setBatches(batchesResponse.data);
     } catch (error) {
       console.error(error);
@@ -38,9 +38,9 @@ const Adminadd=()=> {
 
   const handleAddcourse = async (courseData) => {
     try {
-      const response = await axios.post('http://localhost:8080/courses', courseData);
+      const response = await axios.post('http://165.232.185.65:8080/courses', courseData);
       // Fetch the updated list of courses after adding a new course
-      const updatedCoursesResponse = await axios.get('http://localhost:8080/courses');
+      const updatedCoursesResponse = await axios.get('http://165.232.185.65:8080/courses');
       setCourses(updatedCoursesResponse.data);
     } catch (error) {
       console.error(error);
@@ -49,9 +49,9 @@ const Adminadd=()=> {
   
   const handleAddbatch = async (batchData) => {
     try {
-      const response = await axios.post('http://localhost:8080/batches', batchData);
+      const response = await axios.post('http://165.232.185.65:8080/batches', batchData);
       // Fetch the updated list of batches after adding a new batch
-      const updatedBatchesResponse = await axios.get('http://localhost:8080/batches');
+      const updatedBatchesResponse = await axios.get('http://165.232.185.65:8080/batches');
       setBatches(updatedBatchesResponse.data);
     } catch (error) {
       console.error(error);

@@ -14,7 +14,7 @@ const AdminProfile = () => {
 
   const fetchLeaveRequests = async () => {
     try {
-      const response = await fetch('http://localhost:8080/leave');
+      const response = await fetch('http://165.232.185.65:8080/leave');
       
       if (!response.ok) throw new Error('Failed to fetch leave requests');
       const data = await response.json();
@@ -28,7 +28,7 @@ const AdminProfile = () => {
   const handleUpdateStatus = async (leaveId, newStatus) => {
 
     try {
-      const response = await fetch(`http://localhost:8080/leave/status`, {
+      const response = await fetch(`http://165.232.185.65:8080/leave/status`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ leaveId, newStatus }),

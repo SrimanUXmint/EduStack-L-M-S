@@ -13,7 +13,7 @@ const Timetablee = () => {
 
   const fetchTeachers = async () => {
     try {
-      const teachersResponse = await axios.get('http://localhost:8080/teachers');
+      const teachersResponse = await axios.get('http://165.232.185.65:8080/teachers');
       setTeachers(teachersResponse.data);
     } catch (error) {
       console.error(error);
@@ -22,10 +22,10 @@ const Timetablee = () => {
 
   const fetchCoursesAndBatches = async () => {
     try {
-      const coursesResponse = await axios.get('http://localhost:8080/courses');
+      const coursesResponse = await axios.get('http://165.232.185.65:8080/courses');
       setCourses(coursesResponse.data);
 
-      const batchesResponse = await axios.get('http://localhost:8080/batches');
+      const batchesResponse = await axios.get('http://165.232.185.65:8080/batches');
       setBatches(batchesResponse.data);
     } catch (error) {
       console.error(error);
@@ -34,7 +34,7 @@ const Timetablee = () => {
 
   const fetchTimetable = async (batchId) => {
     try {
-      const timetableResponse = await axios.get('http://localhost:8080/timetable', { params: { batchId } });
+      const timetableResponse = await axios.get('http://165.232.185.65:8080/timetable', { params: { batchId } });
       setBatchTimetables((prev) => ({
         ...prev,
         [batchId]: timetableResponse.data
@@ -57,7 +57,7 @@ const Timetablee = () => {
 
   const handleSave = async (newTimetable) => {
     try {
-      await axios.post('http://localhost:8080/timetable', { ...newTimetable, batchId: selectedBatch });
+      await axios.post('http://165.232.185.65:8080/timetable', { ...newTimetable, batchId: selectedBatch });
       fetchTimetable(selectedBatch);
     } catch (error) {
       console.error(error);

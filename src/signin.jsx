@@ -7,7 +7,7 @@ const Signin = () => {
   useEffect(() => {
     const firsttime = async () => {
       try {
-        const url = "http://localhost:8080/signup";
+        const url = "http://165.232.185.65:8080/signup";
         await axios.post(url, {
         });
         console.log("Admin user created");
@@ -31,7 +31,7 @@ const Signin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "http://localhost:8080/login";
+      const url = "http://165.232.185.65:8080/login";
       const { data: res } = await axios.post(url, data);
       localStorage.setItem("token", res.token);
       localStorage.setItem("role", res.role);

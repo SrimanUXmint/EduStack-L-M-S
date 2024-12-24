@@ -20,7 +20,9 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
     console.error('Error connecting to MongoDB Atlas:', err.message);
   });
 
+// Enable CORS for all origins
 server.use(cors({
+  origin: '*',  // Allow all origins
   credentials: true,
 }));
 

@@ -11,15 +11,15 @@ export default function AdminAttendance() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/courses');
+      const response = await axios.get('http://165.232.185.65:8080/courses');
       const courses = response.data;
 
       const updatedCourses = await Promise.all(courses.map(async course => {
-        const batchesResponse = await axios.get('http://localhost:8080/batches');
+        const batchesResponse = await axios.get('http://165.232.185.65:8080/batches');
         const batches = batchesResponse.data.filter(batch => batch.courseIds.includes(course.courseId));
         
         const updatedBatches = await Promise.all(batches.map(async batch => {
-          const studentsResponse = await axios.get(`http://localhost:8080/studentsattendance?courseId=${course.courseId}&batchId=${batch.batchId}`);
+          const studentsResponse = await axios.get(`http://165.232.185.65:8080/studentsattendance?courseId=${course.courseId}&batchId=${batch.batchId}`);
           const students = studentsResponse.data;
           return { ...batch, students };
         }));
@@ -35,7 +35,7 @@ export default function AdminAttendance() {
 
   const updateStudentAttendance = async (courseId, batchId, studentId, present) => {
     try {
-      await axios.put(`http://localhost:8080/attendance/${courseId}/${batchId}/${studentId}`, { present });
+      await axios.put(`http://165.232.185.65:8080/attendance/${courseId}/${batchId}/${studentId}`, { present });
       setAttendanceData(prevData =>
         prevData.map(course => {
           if (course.courseId === courseId) {

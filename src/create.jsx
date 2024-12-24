@@ -14,7 +14,7 @@ const navigate=useNavigate();
 const handleSubmit= async (e)=>{
   e.preventDefault();
   try{
-    const url="http://localhost:8080/login"
+    const url="http://165.232.185.65:8080/login"
     const {data:res}=await axios.post(url,data);
   
     navigate("/singin")

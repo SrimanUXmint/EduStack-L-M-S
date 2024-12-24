@@ -23,8 +23,8 @@ const AdminCourse = () => {
   const [batches, setBatches] = useState([]);
   const fetchStudentsAndTeachers = async () => {
     try {
-      const studentsResponse = await axios.get('http://localhost:8080/students');
-      const teachersResponse = await axios.get('http://localhost:8080/teachers');
+      const studentsResponse = await axios.get('http://165.232.185.65:8080/students');
+      const teachersResponse = await axios.get('http://165.232.185.65:8080/teachers');
       setStudents(studentsResponse.data);
       setTeachers(teachersResponse.data);
     } catch (error) {
@@ -37,10 +37,10 @@ const AdminCourse = () => {
   }, []);
   const fetchCoursesAndBatches = async () => {
     try {
-      const coursesResponse = await axios.get('http://localhost:8080/courses');
+      const coursesResponse = await axios.get('http://165.232.185.65:8080/courses');
       setCourses(coursesResponse.data);
 
-      const batchesResponse = await axios.get('http://localhost:8080/batches');
+      const batchesResponse = await axios.get('http://165.232.185.65:8080/batches');
       setBatches(batchesResponse.data);
     } catch (error) {
       console.error(error);
@@ -61,11 +61,11 @@ const AdminCourse = () => {
         studentData.courseIds = selectedBatch.courseIds;
       }
 
-      const response = await axios.post('http://localhost:8080/student/add', studentData);
+      const response = await axios.post('http://165.232.185.65:8080/student/add', studentData);
       
       setStudents([...students, response.data]);
       
-      const studentsResponse = await axios.get('http://localhost:8080/students');
+      const studentsResponse = await axios.get('http://165.232.185.65:8080/students');
       setStudents(studentsResponse.data);
     } catch (error) {
       console.error(error);
@@ -74,13 +74,13 @@ const AdminCourse = () => {
   
   const handleAddTeacher = async (teacherData) => {
     try {
-      const response = await axios.post('http://localhost:8080/teacher/add', teacherData);
+      const response = await axios.post('http://165.232.185.65:8080/teacher/add', teacherData);
       console.log('Added teacher response:', response.data); // Log the response data
   
       // Update state directly with the new teacher data
       setStudents([...teachers, response.data]);
       
-      const teachersResponse = await axios.get('http://localhost:8080/teachers');
+      const teachersResponse = await axios.get('http://165.232.185.65:8080/teachers');
      
       setTeachers(teachersResponse.data);
     } catch (error) {
